@@ -6,7 +6,7 @@ import os
 # Datos de la tabla
 kilates = np.array([24, 22, 20, 18, 14, 12, 10])  # Kilates
 densidad = np.array([19.32, 17.69, 16.08, 14.47, 11.25, 9.65, 8.04])  # Densidad
-ley = np.array([100, 916, 900, 750, 585, 500, 417])  # Ley
+ley = np.array([1000, 916, 833, 750, 585, 500, 417])  # Leyhhhjj
 
 # Función polinómica para ajuste
 def poly_func(x, a, b, c):
