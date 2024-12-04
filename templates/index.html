@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Oro</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 2em; }
+        input { padding: 0.5em; margin: 1em 0; }
+        button { padding: 0.7em 1.5em; background-color: #007BFF; color: white; border: none; }
+        .result { margin-top: 2em; }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Oro</h1>
+    <form id="form">
+        <label for="densidad">Ingrese la densidad (g/cm³):</label><br>
+        <input type="number" step="0.01" id="densidad" name="densidad" required><br>
+        <button type="button" onclick="calcular()">Calcular</button>
+    </form>
+    <div class="result">
+        <p id="resultado_kilates"></p>
+        <p id="resultado_ley"></p>
+    </div>
+    <script>
+        async function calcular() {
+            const densidad = document.getElementById("densidad").value;
+            const response = await fetch("/api/calcular", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ densidad })
+            });
+            const data = await response.json();
+            if (data.error) {
+                alert(data.error);
+            } else {
+                document.getElementById("resultado_kilates").innerText = `Kilates estimados: ${data.kilates}`;
+                document.getElementById("resultado_ley").innerText = `Ley estimada: ${data.ley}`;
+            }
+        }
+    </script>
+</body>
+</html>
