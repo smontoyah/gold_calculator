@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import numpy as np
 from scipy.optimize import curve_fit
+import os
 
 # Datos de la tabla
 kilates = np.array([24, 22, 20, 18, 14, 12, 10])  # Kilates
@@ -44,5 +45,6 @@ def calcular():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
